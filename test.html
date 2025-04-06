@@ -1,0 +1,132 @@
+
+ <!-- this is a simple 3D style carousel using HTML, CSS, and JavaScript. The carousel rotates through different cards with a 3D effect. Each card represents a different skill or technology, and the carousel automatically transitions between them every 2.5 seconds. -->
+<!-- The carousel is styled with a dark theme and uses Font Awesome icons for visual representation. The JavaScript handles the logic for updating the active card and applying the appropriate classes for the 3D effect. -->  
+ <!-- i try to make different style of carousel using 3D effect and i use font awesome icons to represent the skills and technologies. -->
+<!-- The carousel is designed to be responsive and visually appealing, with smooth transitions and a modern look. The code is structured to allow easy customization of the cards and their content. -->
+ <!-- its fine i also provide this code for my learning purpose and i also try to make it more interactive and visually appealing. -->
+<!-- The carousel is designed to be responsive and visually appealing, with smooth transitions and a modern look. The code is structured to allow easy customization of the cards and their content. -->
+ <!-- so dont consider this file as a maine file but as a learning file for me and my future reference. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>3D Style Carousel</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      background: #0f172a;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .carousel {
+      position: relative;
+      width: 80%;
+      height: 400px;
+      perspective: 1200px;
+    }
+
+    .carousel-track {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      transition: transform 0.8s ease;
+      transform-style: preserve-3d;
+      position: relative;
+    }
+
+    .card {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 300px;
+      height: 350px;
+      background: #1e293b;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      transform: translate(-50%, -50%) scale(0.7);
+      opacity: 0;
+      transition: all 0.8s ease;
+      text-align: center;
+    }
+
+    .card i {
+      font-size: 50px;
+      margin-bottom: 10px;
+      color: #38bdf8;
+    }
+
+    .card.active {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+      z-index: 3;
+    }
+
+    .card.prev {
+      transform: translate(-120%, -50%) scale(0.8) rotateY(30deg);
+      opacity: 0.6;
+      z-index: 2;
+    }
+
+    .card.next {
+      transform: translate(20%, -50%) scale(0.8) rotateY(-30deg);
+      opacity: 0.6;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="carousel">
+    <div class="carousel-track" id="carouselTrack">
+      <div class="card"><i class="fa-brands fa-figma"></i><h2>UI/UX Design</h2><p>Designing modern interfaces.</p></div>
+      <div class="card"><i class="fa-solid fa-code"></i><h2>Frontend</h2><p>Building responsive websites.</p></div>
+      <div class="card"><i class="fa-solid fa-vial"></i><h2>Testing</h2><p>Ensuring quality and stability.</p></div>
+      <div class="card"><i class="fa-solid fa-database"></i><h2>Database</h2><p>Handling data efficiently.</p></div>
+      <div class="card"><i class="fa-solid fa-cloud"></i><h2>Cloud Basics</h2><p>Scalable cloud knowledge.</p></div>
+      <div class="card"><i class="fa-solid fa-people-group"></i><h2>Team Work</h2><p>Collaborating effectively.</p></div>
+      <div class="card"><i class="fa-solid fa-terminal"></i><h2>Command Line</h2><p>Mastering terminal operations.</p></div>
+      <div class="card"><i class="fa-solid fa-shield-halved"></i><h2>Security</h2><p>Keeping apps safe and secure.</p></div>
+      <div class="card"><i class="fa-solid fa-network-wired"></i><h2>Networking</h2><p>Understanding data flow.</p></div>
+      <div class="card"><i class="fa-solid fa-laptop-code"></i><h2>DSA</h2><p>Cracking algorithms efficiently.</p></div>
+      <div class="card"><i class="fa-solid fa-gears"></i><h2>DevOps</h2><p>Bridging dev and ops smoothly.</p></div>
+      <div class="card"><i class="fa-solid fa-brain"></i><h2>Machine Learning</h2><p>Teaching machines smart stuff.</p></div>
+      <div class="card"><i class="fa-solid fa-chart-line"></i><h2>Analytics</h2><p>Reading data insights clearly.</p></div>
+      <div class="card"><i class="fa-solid fa-mobile-screen"></i><h2>Mobile Dev</h2><p>Crafting responsive apps.</p></div>
+      <div class="card"><i class="fa-solid fa-language"></i><h2>Multilingual</h2><p>Global-ready applications.</p></div>
+    </div>
+  </div>
+
+  <script>
+    const cards = document.querySelectorAll('.card');
+    let index = 0;
+
+    function updateCarousel() {
+      cards.forEach((card, i) => {
+        card.classList.remove('prev', 'next', 'active');
+
+        if (i === index) {
+          card.classList.add('active');
+        } else if (i === (index - 1 + cards.length) % cards.length) {
+          card.classList.add('prev');
+        } else if (i === (index + 1) % cards.length) {
+          card.classList.add('next');
+        }
+      });
+    }
+
+    updateCarousel();
+    setInterval(() => {
+      index = (index + 1) % cards.length;
+      updateCarousel();
+    }, 2500);
+  </script>
+
+</body>
+</html>
